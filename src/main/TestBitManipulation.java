@@ -44,6 +44,17 @@ public class TestBitManipulation {
 		return (num & mask) | (value << i);
 		
 	}
+	
+	// Array contains numbers where all are duplicates except one number
+	// This finds unqiue number by XOR equals starting with 0. This works because x ^ x = 0, so if a number was already added, xoring the same numbers will eventually cancel out
+	// Just think -> (x + y) ^ (x + y) = 0, will work for when the sum of all other numbers comes back around
+	public static int lonelyInt(int[] arr) {
+		int result = 0;
+		for (int num : arr) {
+			result ^= num;
+		}
+		return result;
+	}
 
 	public static void main(String[] args) {
 		int ones = 0b11111111;
@@ -78,6 +89,14 @@ public class TestBitManipulation {
 		testZeros = updateBit(zeros, 4, true);
 		System.out.println(String.format("%1$8s", Integer.toBinaryString(testOnes) ).replace(' ', '0'));
 		System.out.println(String.format("%1$8s", Integer.toBinaryString(testZeros) ).replace(' ', '0') + "\n");
+		
+		System.out.println("Find lonely int");
+		int[] test = {1,4,2,3,3,2,1};
+		for (int num : test) {
+			System.out.print(num + " ");
+		}
+		System.out.println();
+		System.out.println(lonelyInt(test));
 		
 		
 
