@@ -1,5 +1,7 @@
 package main;
 
+import java.util.HashSet;
+
 public class TestDynamic {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,11 +46,31 @@ public class TestDynamic {
         return iValid && jValid;
     }
 	//////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    // Diving board: Given k boards and two size options shorter and longer, how many possible lengths for a full board are there?
+    public static HashSet<Integer> allLengths(int k, int shorter, int longer){
+    	// Use a hashset since we want unique lengths
+    	HashSet<Integer> lengths = new HashSet<>();
+    	
+    	// Remember, only concerned about LENGTHS, not COMBINATIONS between boards, so 2 long = 4 anf 4 short = 4 are the SAME
+    	// If it was combinations, then we would use recursive soltuion
+    	
+    	// This will start by getting the length of all (k) long boards, then go to all (k) short boards.  Remember, 1 short board at the beginning w/ all long baords
+    	// is the same as one short board anywhere with all longboards, therefore we can start will all of one board and replace it one by one for all possible lengths
+    	for (int nShorter = 0; nShorter <= k; nShorter++) {
+    		int nLonger = k - nShorter;
+    		int length = nShorter * shorter + nLonger * longer;
+    		lengths.add(length);
+    	}
+    	return lengths;
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
 	
 
 	public static void main(String[] args) {
-		int test = gridTraveler(10,10);
-		System.out.println(test);
+		HashSet<Integer> test = allLengths(2, 1, 2);
+		System.out.println(test.size());
 
 	}
 

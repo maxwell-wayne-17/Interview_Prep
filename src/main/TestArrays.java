@@ -98,26 +98,6 @@ public class TestArrays {
 	 }
 
 	public static void main(String[] args) {
-//		int[] one = {1,3,3};
-//		int[] two = {2,4};
-//		int[] merged = mergeTwoSortedArrays(one, two);
-//		System.out.println("Merge two sorted arrays");
-//		for (int num : merged) {
-//			System.out.print(num + " ");
-//		}
-//		
-//		System.out.println("\n");
-//		
-//		List<Integer> test = new ArrayList<>();
-//		test.add(5);
-//		test.add(5);
-//		test.add(5);
-//		test.add(5);
-//		test.add(5);
-//		System.out.println("miniMaxSum method");
-//		miniMaxSum(test);
-//		
-//		System.out.println();
 		
 		System.out.println("Binary Search test");
 		int[] search1 = {1,3,4,5,7,8,9};
