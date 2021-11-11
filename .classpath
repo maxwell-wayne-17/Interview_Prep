@@ -6,5 +6,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/maxwn/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/3.0.2-rc/149db042284e8416ef2f7ab57281d9c249ce49ec/mariadb-java-client-3.0.2-rc.jar" sourcepath="C:/Users/maxwn/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/3.0.2-rc/2bb2da4c1cc99dd51e36e36181f884c81ede9ff/mariadb-java-client-3.0.2-rc-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
