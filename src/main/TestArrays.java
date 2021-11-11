@@ -39,6 +39,7 @@ public class TestArrays {
 		return merged;
 	}
 	
+	////////////////////////////////////////////////////////////////////////////////////////////////
 	// Get max and min sums of n-1 elements from arr of size n
 	 public static void miniMaxSum(List<Integer> arr) {
 		    // Write your code here
@@ -72,9 +73,46 @@ public class TestArrays {
 		        }
 		        System.out.println(String.format("%d %d", minSum, maxSum));
 		    }
+	 // Cleaner, probably better
+	 public static void miniMaxSum2(List<Integer> arr) {
+		    // Write your code here
+		        // Find min and max
+		        // Calculate one sum excluding min, calculate another sum excluding max
+		        Integer min = Integer.MAX_VALUE;
+		        Integer max = Integer.MIN_VALUE;
+		        for (int i = 0; i < arr.size(); i++){
+		            int num = arr.get(i);
+		            if (min > num){
+		                min = num;
+		            }
+		            if (max < num){
+		                max = num;
+		            }
+		        }
+		        
+		        // Get min sum
+		        arr.remove(max);
+		        long minSum = 0;
+		        long maxSum = 0;
+		        for (int i = 0; i < arr.size(); i++){
+		            int num = arr.get(i);
+		             minSum += num;		            
+		        }
+		        
+		        // Get max sum
+		        arr.add(max);
+		        arr.remove(min);
+		        for (int i = 0; i < arr.size(); i++){
+		            int num = arr.get(i);
+		             maxSum += num;		            
+		        }
+		        arr.add(min);
+		        System.out.println(String.format("%d %d", minSum, maxSum));
+		    }
+	 ////////////////////////////////////////////////////////////////////////////////////////////////
 	 
 	 // Complete binary search on given sorted array
-	 // If it can't find element, it will return closest int to it (I think)
+	 // If it can't find element, it will return int after it (I think)
 	 public static int binarySearch(int[] arr, int target) {
 		 // Just in case
 		 Arrays.sort(arr);
@@ -98,6 +136,16 @@ public class TestArrays {
 	 }
 
 	public static void main(String[] args) {
+		
+		List<Integer> arr = new ArrayList<>();
+		arr.add(1);
+		arr.add(1);
+		arr.add(1);
+		arr.add(1);
+		arr.add(1);
+		
+		miniMaxSum(arr);
+		miniMaxSum2(arr);
 		
 		System.out.println("Binary Search test");
 		int[] search1 = {1,3,4,5,7,8,9};

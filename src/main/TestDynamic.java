@@ -16,26 +16,28 @@ public class TestDynamic {
         }
         int[][] grid = new int[m][n];
         // call helper function move
-        return move(grid, 0, 0, 0);
+        return move(grid, 0, 0);
     }
 
-    public static int move(int[][] grid, int i, int j, int ways){
-        // Check if final destiation, which grid.length -1 and grid[i].length - 1
-        // Otherwise, check if we can make each resursive call (down or right)
-        //      Recursive call will add to each other
-        // If cannot make a call, return 0
-        // Base case, reached destination
+	// Create a binary tree from each position (down call, right call)
+	// If we eventually hit the destination, add 1
+	// If we hit an invalid spot, return 0
+    public static int move(int[][] grid, int i, int j){
+    	// Invalid point, return 0 indicating not a path
         if (!validPoint(grid, i, j)){
             return 0;
         }
+        // Found a path, add one up the call stack
         else if (i == grid.length - 1 && j == grid[0].length - 1){
             return 1;
         }
+        // Already visited this spot, use the saved answer
         else if (grid[i][j] != 0){
             return grid[i][j];
         }
+        // Unvisited spot, store the solution for future use
         else{
-            grid[i][j] = move(grid, i+1, j, ways) + move(grid, i, j+1, ways);
+            grid[i][j] = move(grid, i+1, j) + move(grid, i, j+1);
             return grid[i][j];
         }  
     }
@@ -51,11 +53,11 @@ public class TestDynamic {
     	// Use a hashset since we want unique lengths
     	HashSet<Integer> lengths = new HashSet<>();
     	
-    	// Remember, only concerned about LENGTHS, not COMBINATIONS between boards, so 2 long = 4 anf 4 short = 4 are the SAME
-    	// If it was combinations, then we would use recursive soltuion
+    	// Remember, only concerned about LENGTHS, not COMBINATIONS between boards, so 2 long = 4 and 4 short = 4 are the SAME
+    	// If it was combinations, then we would use recursive solution similar to grid traveler
     	
-    	// This will start by getting the length of all (k) long boards, then go to all (k) short boards.  Remember, 1 short board at the beginning w/ all long baords
-    	// is the same as one short board anywhere with all longboards, therefore we can start will all of one board and replace it one by one for all possible lengths
+    	// This will start by getting the length of all (k) long boards, then go to all (k) short boards.  Remember, 1 short board at the beginning w/ all long boards
+    	// is the same as one short board anywhere with all long boards, therefore we can start with all of one board and replace it one by one for all possible lengths
     	for (int nShorter = 0; nShorter <= k; nShorter++) {
     		int nLonger = k - nShorter;
     		int length = nShorter * shorter + nLonger * longer;
@@ -146,12 +148,45 @@ public class TestDynamic {
     	return neighbors;
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    // Can climb up n stairs by taking either 1 or two steps
+    // Iterative solution below, but can be done recursively with memoization like grid traverse
+    public static int climbStairs(int n) {
+    	// One step, one possibility
+    	if (n == 1) {
+    		return 1;
+    	}
+        // Store first two numbers (which is the last two steps)
+        int[] store = new int[n];
+        // Last step can only take one step to get to n
+        store[0] = 1;
+        // Second to last step can either take two steps, or one step twice (for all numbers)
+        store[1] = 2;
+        
+        for(int i = 2; i < n; i++){
+            // j = 1 and j<=2 because we can take 1 or two steps (can be modified for any num steps)
+            for(int j = 1; j <= 2; j++ ){
+                // Store current number based off combination of sum of taking one step up or two steps up
+                store[i] += store[i-j];
+            }
+        }
+        // return last index of store
+        return store[n-1];
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public static void main(String[] args) {
-		int[][] grid1 = {{2,1,1},{1,1,0},{0,1,1}};
-		int[][] grid2 = {{2,1,1},{0,1,1},{1,0,1}};
-		int[][] grid3 = {{0,2}};
-		System.out.println(orangesRotting(grid3));
+//		int[][] grid1 = {{2,1,1},{1,1,0},{0,1,1}};
+//		int[][] grid2 = {{2,1,1},{0,1,1},{1,0,1}};
+//		int[][] grid3 = {{0,2}};
+//		System.out.println(orangesRotting(grid3));
+		
+		System.out.println(gridTraveler(2,2));
+		System.out.println(gridTraveler(3,3));
+		System.out.println(gridTraveler(4,4));
+		
+		System.out.println(climbStairs(4));
 
 	}
 

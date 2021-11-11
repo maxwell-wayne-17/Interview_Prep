@@ -39,10 +39,10 @@ public class TestHeaps {
 					else if (o1[1] < o2[1]) {
 						return 1;
 					}
-					else if (o1[0] > o2[1]) {
+					else if (o1[0] > o2[0]) {
 						return -1;
 					}
-					else if (o1[0] < o2[1]) {
+					else if (o1[0] < o2[0]) {
 						return 1;
 					}
 					else {
